@@ -1,5 +1,6 @@
 #!/bin/bash
-# Author: Johan Vennberg
+# Author: Johan Vennberg jvg19001
+#DVA239
 
 # Switch to root user & change dir to root
 su -

@@ -1,20 +1,44 @@
 #!/bin/bash
-#Author Johan Vennberg
+#!/bin/bash
+# Author: Johan Vennberg jvg19001
+#DVA239
 
-group=$1
-user=$2
+function addGroup {
+  echo "###CREATE GROUP###"
+  echo -n "Enter groupname:"
+  read groupname
 
-groupadd $1
+  if [ -z "$(getent group $groupname)" ]; then
+    echo "Succed. Adding group..."
+    groupadd $groupname
+    addUser $groupname
+  else
+    echo "Group alrerady existis, try again"
+    addGroup
+  fi
+}
+function addUser {
 
-useradd -g $1 $2
+  echo "###CREATE USER###"
+  echo -n "Enter username:"
+  read username
 
-pass = "password"
+  if [ -z "$(getent passwd $username)" ]; then
+    echo "Succed. Adding user..."
+    useradd -g $1 $username
+    manageDir $username $1
+  else
+    echo "Username alrerady existis, try again"
+    addUser $1
+  fi
+}
 
-passwd $2
+function manageDir {
 
-cd /
-mkdir $2
+  mkdir /$1
 
-chown $2:$1 /$2
-chmod 1770 $2
- 
+  chown $1:$2 /$1
+  chmod 1770 /$1
+}
+
+addGroup
