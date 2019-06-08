@@ -37,7 +37,7 @@ chown engineering_admin:engineering /engineering
 chown sales_admin:sales /sales
 chown is_admin:is /is
 
-#Change Permission & set sticky bit
+#Change Permission for each directory and the subdirectory  & set sticky bit
 chmod -R 1770 engineering
 chmod -R 1770 sales
 chmod -R 1770 is

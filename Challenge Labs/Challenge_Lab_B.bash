@@ -3,6 +3,12 @@
 # Author: Johan Vennberg jvg19001
 #DVA239
 
+#I divided this script into 3 functions to solve the problem
+
+# This function add a group. With the getent command we can check if the group allready exists.
+#The -z option returns true if an empty string is returned
+#The groupname is a parameter to addUser function
+
 function addGroup {
   echo "###CREATE GROUP###"
   echo -n "Enter groupname:"
@@ -17,6 +23,8 @@ function addGroup {
     addGroup
   fi
 }
+
+#The same idea hera as in previous function
 function addUser {
 
   echo "###CREATE USER###"
@@ -32,7 +40,7 @@ function addUser {
     addUser $1
   fi
 }
-
+#A function to create a directory and manage the premission
 function manageDir {
 
   mkdir /$1
@@ -41,4 +49,5 @@ function manageDir {
   chmod 1770 /$1
 }
 
+#the single command to excecute the rest of the script
 addGroup

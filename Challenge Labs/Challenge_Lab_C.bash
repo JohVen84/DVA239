@@ -18,5 +18,6 @@ tar -tf ~/archive/log.tar
 #Extract to the backup directory
 tar -xvf ~/archive/log.tar -C ~/backup
 
+#Change to backup dir and verify the files are there
 cd  ~/backup
 ls
