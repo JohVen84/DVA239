@@ -1,17 +1,21 @@
 # Functions to manage groups
 # Author Johan Vennberg
+#!/bin/b
+INPUT=/tmp/menu.sh.$$
 
 function addGroup {
-  function addGroup {
-    echo "###CREATE GROUP###"
-    echo -n "Enter groupname:"
-    read groupname
+  dialog --title "Create a group" \
+  --backtitle "Project Work" \
+  --inputbox "Enter groupname " 8 60 2>$INPUT
+  groupname=$(<$INPUT)
+
+  repsonse=$?
 
     if [ -z "$(getent group $groupname)" ]; then
-      echo "Succed. Adding group..."
+      dialog --title 'Message' --msgbox "Succed. Adding group..." 5 20
       groupadd $groupname
       else
-      echo "Group alrerady existis, try again"
+      dialog --title 'Message' --msgbox "Group alreay exists" 5 60
       addGroup
     fi
   }

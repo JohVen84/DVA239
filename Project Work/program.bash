@@ -1,21 +1,9 @@
 #!/bin/bash
 source group.bash
-if which dialog > /dev/null; then
-    echo "Dialog allready installed. Skipping..."
-else
-    echo "Installing dialog..."
-    apt-get install -y dialog
-fi
 
-function helloHey {
-  dialog --title 'Message' --msgbox 'Hello hey!!' 5 20
-}
-
+function start {
 INPUT=/tmp/menu.sh.$$
-
-
-
-  while true
+while true
   do
   dialog --title "User and group manager" --backtitle "Project Work" --menu "Select a management action in the menu below:" 20 60 13 \
   group:create "Create new groups" \
@@ -37,8 +25,18 @@ INPUT=/tmp/menu.sh.$$
 
   # make decsion
   case $menuitem in
-  	group:create) helloHey;;
+  	group:create) addGroup;;
     group:view) listGroups;;
   esac
 
   done
+}
+
+
+if which dialog > /dev/null; then
+    start
+else
+  echo "Install dialog"
+  apt-get install dialog
+  start
+fi
