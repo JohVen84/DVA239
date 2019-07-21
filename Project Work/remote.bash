@@ -1,4 +1,4 @@
-
+#!bin/bash
 
 
 function startMenu {
@@ -15,7 +15,7 @@ function startMenu {
 
     menuitem=$(<"${INPUT}")
 
-    case menuitem in
+    case $menuitem in
         ssh:install) installSSH;;
         ssh:uninstall) uninstallSSH;;
         ssh:enable) enableSSH;;
@@ -29,11 +29,12 @@ function startMenu {
 }
 
 function installSSH {
-    apt-get install openssh-server -y
+    apt-get install openssh-server -y > /dev/null
+
 }
 
 function uninstallSSH {
-    apt-get remove openssh-server
+    apt-get remove openssh-server -y > /dev/null
 }
 
 function enableSSH {
@@ -54,7 +55,7 @@ function createKey {
 
   dialog --title "SSH key" \
   --backtitle "Project Work" \
-  --textbox tmp.txt 10 40
+  --textbox tmp.txt 30 65
 }
 
 function listKeys {
